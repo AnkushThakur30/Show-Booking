@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ShowBook | Premium Booking</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+  </head>
+  <body>
+    <div id="authScreen" class="auth-screen active">
+      <div class="auth-visual">
+        <div class="brand-block">
+          <div class="brand-badge">SB</div>
+          <div>
+            <p class="eyebrow light">Premium entertainment</p>
+            <h1>ShowBook</h1>
+          </div>
+        </div>
+        <div class="promo-card">
+          <span>Live events</span>
+          <h2>Book tickets in minutes</h2>
+          <p>Secure seats, fast checkout, and an elegant movie-night experience.</p>
+        </div>
+      </div>
+
+      <div class="auth-panel">
+        <div class="auth-tabs">
+          <button class="tab-btn active" data-tab="login">Login</button>
+          <button class="tab-btn" data-tab="signup">Sign up</button>
+          <button class="tab-btn" data-tab="forgot">Forgot</button>
+        </div>
+
+        <div class="auth-form-wrap">
+          <form id="loginForm" class="auth-form active">
+            <h2>Welcome back</h2>
+            <label>
+              Email
+              <input type="email" id="loginEmail" placeholder="you@example.com" required />
+            </label>
+            <label>
+              Password
+              <input type="password" id="loginPassword" placeholder="••••••••" required />
+            </label>
+            <button type="submit" class="primary-btn large">Login</button>
+            <p class="helper-text">Demo account: demo@showbook.com / password123</p>
+          </form>
+
+          <form id="signupForm" class="auth-form">
+            <h2>Create account</h2>
+            <label>
+              Full name
+              <input type="text" id="signupName" placeholder="Jane Doe" required />
+            </label>
+            <label>
+              Email
+              <input type="email" id="signupEmail" placeholder="you@example.com" required />
+            </label>
+            <label>
+              Password
+              <input type="password" id="signupPassword" placeholder="Create a password" required />
+            </label>
+            <button type="submit" class="primary-btn large">Sign up</button>
+          </form>
+
+          <form id="forgotForm" class="auth-form">
+            <h2>Reset password</h2>
+            <label>
+              Email address
+              <input type="email" id="forgotEmail" placeholder="you@example.com" required />
+            </label>
+            <button type="submit" class="primary-btn large">Send reset link</button>
+            <p class="helper-text">A reset link will be sent to your email.</p>
+          </form>
+        </div>
+
+        <div id="authMessage" class="auth-message info">Ready to continue.</div>
+      </div>
+    </div>
+
+    <div id="appScreen" class="app-shell hidden">
+      <header class="topbar">
+        <div class="brand-row">
+          <div class="brand-badge small">SB</div>
+          <div>
+            <p class="eyebrow">Cinema & live events</p>
+            <h1>ShowBook</h1>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <div class="user-chip">
+            <span class="dot"></span>
+            <strong id="loggedUserLabel">Guest</strong>
+          </div>
+          <button id="logoutButton" class="secondary-btn">Logout</button>
+        </div>
+      </header>
+
+      <main class="layout">
+        <section class="show-panel">
+          <header class="panel-header">
+            <h2>Available shows</h2>
+            <span class="panel-pill">Now showing</span>
+          </header>
+          <div id="showList" class="show-list"></div>
+        </section>
+
+        <section class="booking-panel">
+          <div class="screen-label">SCREEN</div>
+          <div class="seat-map-wrapper">
+            <div id="seatMap" class="seat-map" aria-live="polite"></div>
+          </div>
+
+          <div class="booking-actions">
+            <div class="countdown-box">
+              <span>Transaction window</span>
+              <strong id="countdown">15:00</strong>
+            </div>
+            <div class="payment-choice">
+              <label for="paymentMode">Payment mode</label>
+              <select id="paymentMode">
+                <option value="code">Show code at counter</option>
+                <option value="pdf">Generate receipt PDF</option>
+              </select>
+            </div>
+            <button id="payButton" class="primary-btn">Pay at Counter</button>
+            <button id="resetButton" class="secondary-btn">Reset Booking</button>
+          </div>
+        </section>
+
+        <aside class="status-panel">
+          <h2>Booking status</h2>
+          <div id="statusMessage" class="status-box info">
+            Select a show and click any available seat to start the 15-minute transaction window.
+          </div>
+
+          <div class="summary-card">
+            <p>Selected show</p>
+            <strong id="selectedShowLabel">No show selected</strong>
+          </div>
+
+          <div class="summary-card detail-card" id="selectedShowInfo">
+            <p class="detail-label">Description</p>
+            <p>Select a movie to view information and trailer.</p>
+          </div>
+
+          <div class="summary-card">
+            <p>Selected seat</p>
+            <strong id="selectedSeatLabel">None</strong>
+          </div>
+
+          <div class="summary-card">
+            <p>Seat status</p>
+            <strong id="seatStatusLabel">Available</strong>
+          </div>
+        </aside>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -669,7 +669,7 @@ function handleReset() {
 }
 
 function renderUpcomingMovies() {
-  const upcoming = shows.slice(0, 3);
+  const upcoming = shows;
   elements.upcomingList = document.getElementById('upcomingList');
   if (!elements.upcomingList) return;
 

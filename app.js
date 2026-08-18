@@ -551,30 +551,6 @@ function renderSeatMap() {
   rows.forEach((row) => elements.seatMap.appendChild(row));
 
   const selectedSeat = state.selectedSeatId ? state.seats[state.selectedSeatId] : null;
-  const currentShow = getSelectedShow();
-  elements.selectedShowLabel.textContent = `${currentShow.name} (${currentShow.type})`;
-  elements.selectedSeatLabel.textContent = state.selectedSeatId || 'None';
-  elements.seatStatusLabel.textContent = selectedSeat ? selectedSeat.status : 'Available';
-
-  if (state.selectedSeatId && selectedSeat && selectedSeat.status === 'pending') {
-    elements.seatStatusLabel.textContent = `Pending (${selectedSeat.heldBy})`;
-  }
-
-  const selectedShowInfo = document.getElementById('selectedShowInfo');
-  if (selectedShowInfo) {
-    selectedShowInfo.innerHTML = `
-      <div class="detail-header">
-        <div>
-          <p class="detail-label">Now selected</p>
-          <h3>${currentShow.name}</h3>
-        </div>
-        <span class="show-rating compact">${currentShow.rating}</span>
-      </div>
-      <p class="detail-meta">${currentShow.genre} · ${currentShow.duration} · ${currentShow.time}</p>
-      <p>${currentShow.description}</p>
-      <a class="trailer-link detail" href="${currentShow.trailer}" target="_blank" rel="noopener noreferrer">Watch trailer</a>
-    `;
-  }
 }
 
 function handleSeatClick(seatId) {
@@ -674,6 +650,13 @@ function payAtCounter() {
   renderSeatMap();
 }
 
+function renderAll() {
+  renderShowList();
+  renderUpcomingMovies();
+  resetShowSeats();
+  renderSeatMap();
+}
+
 function handleReset() {
   state.selectedSeatId = null;
   const show = getSelectedShow();
@@ -685,11 +668,28 @@ function handleReset() {
   renderSeatMap();
 }
 
-function renderAll() {
-  renderShowList();
-  resetShowSeats();
-  renderSeatMap();
-  elements.selectedShowLabel.textContent = `${getSelectedShow().name} (${getSelectedShow().type})`;
+function renderUpcomingMovies() {
+  const upcoming = shows.slice(0, 3);
+  elements.upcomingList = document.getElementById('upcomingList');
+  if (!elements.upcomingList) return;
+
+  elements.upcomingList.innerHTML = upcoming
+    .map(
+      (show) => `
+        <div class="upcoming-card">
+          <img class="upcoming-poster" src="${show.poster}" alt="${show.name}" />
+          <div class="upcoming-info">
+            <h3 class="upcoming-title">${show.name}</h3>
+            <div class="upcoming-meta">
+              <span class="badge">${show.type}</span>
+              <span>${show.time}</span>
+            </div>
+            <a class="watch-trailer-btn" href="${show.trailer}" target="_blank" rel="noopener noreferrer">▶ Watch trailer</a>
+          </div>
+        </div>
+      `
+    )
+    .join('');
 }
 
 function initAuth() {

@@ -133,30 +133,11 @@
         </section>
 
         <aside class="status-panel">
-          <h2>Booking status</h2>
-          <div id="statusMessage" class="status-box info">
-            Select a show and click any available seat to start the 15-minute transaction window.
-          </div>
-
-          <div class="summary-card">
-            <p>Selected show</p>
-            <strong id="selectedShowLabel">No show selected</strong>
-          </div>
-
-          <div class="summary-card detail-card" id="selectedShowInfo">
-            <p class="detail-label">Description</p>
-            <p>Select a movie to view information and trailer.</p>
-          </div>
-
-          <div class="summary-card">
-            <p>Selected seat</p>
-            <strong id="selectedSeatLabel">None</strong>
-          </div>
-
-          <div class="summary-card">
-            <p>Seat status</p>
-            <strong id="seatStatusLabel">Available</strong>
-          </div>
+          <header class="panel-header">
+            <h2>Upcoming</h2>
+            <span class="panel-pill">Coming soon</span>
+          </header>
+          <div id="upcomingList" class="upcoming-list"></div>
         </aside>
       </main>
     </div>

@@ -488,6 +488,30 @@ button {
   font-size: 0.9rem;
 }
 
+.booking-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 24px auto 0;
+  max-width: 680px;
+}
+
+.booking-summary > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(15, 23, 42, 0.72);
+}
+
+.booking-summary strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 @keyframes fadeUp {
   from {
     opacity: 0;
@@ -612,6 +636,11 @@ button {
   padding: 16px;
   line-height: 1.6;
   margin-bottom: 18px;
+}
+
+.booking-panel > .status-box {
+  max-width: 680px;
+  margin: 14px auto 0;
 }
 
 .status-box.success {
@@ -762,6 +791,10 @@ button {
 
   .layout {
     grid-template-columns: 1fr;
+  }
+
+  .booking-summary {
+    max-width: none;
   }
 
   .booking-actions {
